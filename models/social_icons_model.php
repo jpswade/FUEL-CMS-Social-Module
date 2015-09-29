@@ -56,6 +56,9 @@ class Social_icons_model extends Base_module_model {
         $pattern = $sets[$iconset]['pattern'];
         $filename = basename($url);
         $file = cache_path($filename);
+        if (!is_writable(dirname($file))) {
+            $file = sys_get_temp_dir() . '/' . $filename;
+        }
         if (!file_exists($file)) {
             copy($url, $file);
         }
@@ -83,7 +86,7 @@ class Social_icon_model extends Base_module_record {
         $attrs = array();
         $attrs[] = (!empty($this->target)) ? 'target="_' . $this->target . '"' : '';
         $attrs[] = (!empty($this->icon)) ? 'class="' . $this->set . ' ' . $this->set . '-' . $this->icon . '"' : '';
-        $attrs[] = (!empty($this->color)) ? 'style="color: ' . $this->color . '"' : '';
+        $attrs[] = (!empty($this->color)) ? 'style="color: #' . $this->color . '"' : '';
         return anchor($url, $label, implode(' ', $attrs));
     }
 
