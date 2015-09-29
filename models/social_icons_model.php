@@ -54,10 +54,11 @@ class Social_icons_model extends Base_module_model {
         $url = $sets[$iconset]['url'];
         $pattern = $sets[$iconset]['pattern'];
         $filename = basename($url);
-        if (!file_exists($filename)) {
-            copy($url, $filename);
+        $file = cache_path($filename);
+        if (!file_exists($file)) {
+            copy($url, $file);
         }
-        $content = file_get_contents($filename);
+        $content = file_get_contents($file);
         $match = array();
         preg_match_all($pattern, $content, $match);
         if (!empty($match)) {
