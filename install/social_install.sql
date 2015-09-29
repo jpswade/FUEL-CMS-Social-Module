@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS `social_icons` (
   `url` varchar(255) DEFAULT NULL,
   `target` enum('blank','self','parent') DEFAULT 'blank',
   `icon` varchar(45) DEFAULT NULL,
+  `color` varchar(45) DEFAULT NULL;
   `precedence` int(11) NOT NULL DEFAULT '0',
   `published` enum('yes','no') DEFAULT 'yes',
   PRIMARY KEY (`id`)

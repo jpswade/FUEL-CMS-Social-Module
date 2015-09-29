@@ -26,6 +26,7 @@ class Social_icons_model extends Base_module_model {
         $fields = parent::form_fields();
         $fields['url']['label'] = 'URL';
         $fields['icon'] = array('type' => 'select', 'options' => $this->get_icons(), 'first_option' => 'Select an icon...', 'required' => TRUE, 'after_html' => '<i id="icon-preview" class=""></i>');
+        $fields['color'] = array('type' => 'colorpicker');
         return $fields;
     }
 
@@ -82,6 +83,7 @@ class Social_icon_model extends Base_module_record {
         $attrs = array();
         $attrs[] = (!empty($this->target)) ? 'target="_' . $this->target . '"' : '';
         $attrs[] = (!empty($this->icon)) ? 'class="' . $this->set . ' ' . $this->set . '-' . $this->icon . '"' : '';
+        $attrs[] = (!empty($this->color)) ? 'style="color: ' . $this->color . '"' : '';
         return anchor($url, $label, implode(' ', $attrs));
     }
 
