@@ -31,7 +31,7 @@ class Social_icons_model extends Base_module_model {
     }
 
     function _common_query() {
-        
+        parent::_common_query();
     }
     
     function get_iconsets() {
