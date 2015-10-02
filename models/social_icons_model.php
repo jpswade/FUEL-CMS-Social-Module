@@ -78,16 +78,18 @@ class Social_icons_model extends Base_module_model {
 class Social_icon_model extends Base_module_record {
 
     function get_link() {
+        $set = $this->_parent_model->set;
         $url = $this->url;
         if (!is_http_path($url)) {
             $url = 'http://' . $url;
         }
         $label = (!empty($this->name)) ? $this->name : $this->url;
+        $class = (!empty($this->icon)) ? $set . ' ' . $set . '-' . $this->icon : '';
         $attrs = array();
+        $attrs[] = (!empty($label)) ? 'title="' . $label . '"' : '';
         $attrs[] = (!empty($this->target)) ? 'target="_' . $this->target . '"' : '';
-        $attrs[] = (!empty($this->icon)) ? 'class="' . $this->set . ' ' . $this->set . '-' . $this->icon . '"' : '';
         $attrs[] = (!empty($this->color)) ? 'style="color: #' . $this->color . '"' : '';
-        return anchor($url, $label, implode(' ', $attrs));
+        return anchor($url, '<i class="' . $class . '"></i>', implode(' ', $attrs));
     }
 
 }
