@@ -9,7 +9,7 @@ require_once(FUEL_PATH . 'models/base_module_model.php');
 class Social_icons_model extends Base_module_model {
 
     public $required = array('url');
-    private $set = 'fa';
+    public $set = 'fa';
 
     function __construct() {
         parent::__construct('social_icons', SOCIAL_FOLDER); // table name
@@ -33,7 +33,7 @@ class Social_icons_model extends Base_module_model {
     function _common_query() {
         parent::_common_query();
     }
-    
+
     function get_iconsets() {
         $sets = array();
         $sets['glyphicons'] = array();
@@ -43,8 +43,8 @@ class Social_icons_model extends Base_module_model {
         $sets['fa']['pattern'] = '/\.#\{\$fa-css-prefix\}-([^,\s"]+):before/is';
         return $sets;
     }
-    
-    function get_icons ($iconset = false) {
+
+    function get_icons($iconset = false) {
         if (!$iconset) {
             $iconset = $this->set;
         }
@@ -84,12 +84,15 @@ class Social_icon_model extends Base_module_record {
             $url = 'http://' . $url;
         }
         $label = (!empty($this->name)) ? $this->name : $this->url;
-        $class = (!empty($this->icon)) ? $set . ' ' . $set . '-' . $this->icon : '';
+        $style = array();
+        $style[] = (!empty($this->color)) ? 'color: #' . $this->color : '';
+        $class = array();
+        $class[] = (!empty($this->icon)) ? $set . ' ' . $set . '-' . $this->icon : '';
         $attrs = array();
         $attrs[] = (!empty($label)) ? 'title="' . $label . '"' : '';
         $attrs[] = (!empty($this->target)) ? 'target="_' . $this->target . '"' : '';
-        $attrs[] = (!empty($this->color)) ? 'style="color: #' . $this->color . '"' : '';
-        return anchor($url, '<i class="' . $class . '"></i>', implode(' ', $attrs));
+        $attrs[] = (!empty($style)) ? 'style="' . implode(' ', $style) . '"' : '';
+        return anchor($url, '<i class="' . implode(' ', $class) . '"></i>', implode(' ', $attrs));
     }
 
 }
