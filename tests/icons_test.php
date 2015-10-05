@@ -31,7 +31,7 @@ class icons_test extends Tester_base {
         $name = 'YouTube';
         $icon = $this->CI->social->find_one(array('name' => $name));
         $test = $icon->link;
-        $expected = '<a href="http://www.youtube.com/user" title="YouTube" target="_blank" style=""><i class="fa fa-youtube"></i></a>';
+        $expected = '<a href="http://www.youtube.com/user" title="YouTube" target="_blank" ><i class="fa fa-youtube"></i></a>';
         $this->run($test, $expected, __FUNCTION__ . '() Test for link');
     }
 
