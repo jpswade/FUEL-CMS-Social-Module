@@ -84,15 +84,17 @@ class Social_icon_model extends Base_module_record {
             $url = 'http://' . $url;
         }
         $label = (!empty($this->name)) ? $this->name : $this->url;
-        $style = array();
-        $style[] = (!empty($this->color)) ? 'color: #' . $this->color : '';
-        $class = array();
-        $class[] = (!empty($this->icon)) ? $set . ' ' . $set . '-' . $this->icon : '';
+        $styles = array();
+        $styles[] = (!empty($this->color)) ? 'color: #' . $this->color : NULL;
+        $style = implode(' ', $styles);
+        $classes = array();
+        $classes[] = (!empty($this->icon)) ? $set . ' ' . $set . '-' . $this->icon : NULL;
+        $class = implode(' ', $classes);
         $attrs = array();
-        $attrs[] = (!empty($label)) ? 'title="' . $label . '"' : '';
-        $attrs[] = (!empty($this->target)) ? 'target="_' . $this->target . '"' : '';
-        $attrs[] = (!empty($style)) ? 'style="' . implode(' ', $style) . '"' : '';
-        return anchor($url, '<i class="' . implode(' ', $class) . '"></i>', implode(' ', $attrs));
+        $attrs[] = (!empty($label)) ? 'title="' . $label . '"' : NULL;
+        $attrs[] = (!empty($this->target)) ? 'target="_' . $this->target . '"' : NULL;
+        $attrs[] = ($style) ? 'style="' . $style . '"' : NULL;
+        return anchor($url, '<i class="' . $class . '"></i>', implode(' ', $attrs));
     }
 
 }
